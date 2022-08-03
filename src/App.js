@@ -3,7 +3,16 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [personajes, setPersonajes] = useState([]);
+  const [deleteMovi, setDeleteMovi] = useState([]);
+  const [personajes, setPersonajes] = useState(() => {
+    const saveMovie = localStorage.getItem("peliculasData");
+    if (saveMovie) {
+      return JSON.parse(saveMovie);
+    } else {
+      return [];
+    }
+  });
+
   useEffect(() => {
     axios
       .get(
@@ -17,6 +26,7 @@ function App() {
   }, []);
 
   console.log(personajes);
+  localStorage.setItem("peliculas", JSON.stringify(personajes));
   return (
     <div className="App">
       <h1 className="title">¡ Bienvenidos a Marvel ! </h1>
