@@ -29,13 +29,13 @@ export default function Home() {
 
   localStorage.setItem("movies", JSON.stringify(personajes));
 
-  const deletefilme = () => {
+  const handleDelete = () => {
     axios
       .delete(apiMarvel)
       .then((res) => {
         const prueba = res.data;
         console.log(prueba + "bnoooooooo");
-        //alert("Esta segbnooooooooouro de eliminar la pelicula?");
+        //alert("Esta seguro de eliminar la pelicula?");
         //setPersonajes([]);
       })
       .catch((error) => console.log(error + "llegue"));
@@ -59,7 +59,7 @@ export default function Home() {
               <div className="card-body">
                 <h5 className="card-title">{per.name}</h5>
                 <p className="card-text">{per.modified}</p>
-                <button className="btn-delete" onClick={() => deletefilme()}>
+                <button className="btn-delete" onClick={() => handleDelete()}>
                   Eliminar
                 </button>
               </div>
