@@ -2,15 +2,15 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import NewMovies from "./NewMovies";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const apiMarvel =
   "https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=3a98ecbdd119321374d9a4c72c461aed&hash=cfcb76b520d12104b8962da709212942";
 
 export default function Home() {
-  //let navigate = useNavigate();
+  let navigate = useNavigate();
   const [deleteMovie, setDeleteMovie] = useState([]);
   const [personajes, setPersonajes] = useState(() => {
-    const saveMovie = localStorage.getItem("peliculasData");
+    const saveMovie = localStorage.getItem("moviesData");
     if (saveMovie) {
       return JSON.parse(saveMovie);
     } else {
@@ -27,7 +27,7 @@ export default function Home() {
       .catch((error) => console.log(error));
   }, []);
 
-  localStorage.setItem("peliculas", JSON.stringify(personajes));
+  localStorage.setItem("movies", JSON.stringify(personajes));
 
   const deletefilme = () => {
     axios
@@ -52,6 +52,9 @@ export default function Home() {
                 src={` ${per.thumbnail.path}.${per.thumbnail.extension}`}
                 className="card-img-top"
                 style={{ width: "74%", height: "74%" }}
+                onClick={() => {
+                  navigate("/descriptionMovie");
+                }}
               />
               <div className="card-body">
                 <h5 className="card-title">{per.name}</h5>
