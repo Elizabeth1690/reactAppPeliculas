@@ -1,12 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import NewMovies from "./NewMovies";
+
 import { useNavigate } from "react-router-dom";
 const apiMarvel =
   "https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=3a98ecbdd119321374d9a4c72c461aed&hash=cfcb76b520d12104b8962da709212942";
 
-export default function Home() {
+export default function Home(newMovie) {
   let navigate = useNavigate();
   const [deleteMovie, setDeleteMovie] = useState([]);
   const [personajes, setPersonajes] = useState(() => {
@@ -59,6 +59,7 @@ export default function Home() {
               <div className="card-body">
                 <h5 className="card-title">{per.name}</h5>
                 <p className="card-text">{per.modified}</p>
+                <p className="card-textuno">{per.newMovie}</p>
                 <button className="btn-delete" onClick={() => handleDelete()}>
                   Eliminar
                 </button>
